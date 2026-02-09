@@ -1,6 +1,7 @@
 package com.learning.core;
 
 import org.apache.commons.lang3.StringUtils;
+import com.learning.java.LogicBuilding;
 import com.learning.java.StreamPractice;
 
 /**
@@ -11,17 +12,23 @@ import com.learning.java.StreamPractice;
 public class UserInputProcessor
 {
    private static UserInputProcessor processor = new UserInputProcessor();
-   //Eager Initialization (Simple & Thread-safe)
-   
-   public static UserInputProcessor getInstance() {
+   // Eager Initialization (Simple & Thread-safe)
+
+   public static UserInputProcessor getInstance()
+   {
       return processor;
    }
-   public void processRequest(String input) {
+
+   public void processRequest(String input)
+   {
       System.out.println();
       switch (CoreJavaTopics.valueOf(StringUtils.upperCase(input)))
       {
          case STREAMS:
             StreamPractice.getInstance().printStreamUses();
+            break;
+         case LOGIC:
+            LogicBuilding.getInstance().buildLogic();
             break;
          default:
             break;

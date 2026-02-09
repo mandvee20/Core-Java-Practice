@@ -43,7 +43,8 @@ public class StreamPractice
    public void printStreamUses()
    {
 
-
+      out.println("Learning Java 8 Streams");
+      
       /** Stream: java.util.stream.ReferencePipeline$Head@57829d67 **/
 
       Stream<String> streamEmpty = Stream.empty();

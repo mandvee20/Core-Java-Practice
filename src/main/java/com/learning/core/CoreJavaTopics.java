@@ -12,6 +12,7 @@ public enum CoreJavaTopics
    GENRIC,
    COLLECTIONS,
    STREAMS,
+   LOGIC,
    KNX,
    MQTT;
 }

@@ -33,6 +33,7 @@ public class UserInputReader implements Runnable
             if (StringUtils.isNotBlank(input))
             {
                processor.processRequest(input);
+               
             }
          }
       }
