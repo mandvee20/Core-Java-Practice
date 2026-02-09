@@ -4,6 +4,12 @@
   <artifactId>java</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>Learning Java</name>
+  
+  <!-- Java 21 configuration -->
+	<properties>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+	</properties>
   	<dependencies>
 		<!-- To Make MQTT Connection -->
 		<dependency>
