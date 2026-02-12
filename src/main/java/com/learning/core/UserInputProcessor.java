@@ -22,7 +22,7 @@ public class UserInputProcessor
    public void processRequest(String input)
    {
       System.out.println();
-      switch (CoreJavaTopics.valueOf(StringUtils.upperCase(input)))
+      switch (CoreJavaTopics.fromString(input))
       {
          case STREAMS:
             StreamPractice.getInstance().printStreamUses();
@@ -31,6 +31,8 @@ public class UserInputProcessor
             LogicBuilding.getInstance().buildLogic();
             break;
          default:
+            StreamPractice.getInstance().printStreamUses();
+            LogicBuilding.getInstance().buildLogic();
             break;
       }
    }
