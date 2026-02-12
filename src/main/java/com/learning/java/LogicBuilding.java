@@ -25,7 +25,7 @@ public class LogicBuilding
    public void buildLogic()
    {
       out.println("Learning Logic Building");
-      reverseNumber(12345);
+      reverseNumber(-12546);
    }
 
    private void reverseNumber(int number)

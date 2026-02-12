@@ -8,10 +8,13 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.IntSummaryStatistics;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.Random;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
@@ -44,7 +47,7 @@ public class StreamPractice
    {
 
       out.println("Learning Java 8 Streams");
-      
+
       /** Stream: java.util.stream.ReferencePipeline$Head@57829d67 **/
 
       Stream<String> streamEmpty = Stream.empty();
@@ -309,11 +312,70 @@ public class StreamPractice
       List<Product> productList = Arrays.asList(new Product(23, "potatoes"),
                new Product(14, "orange"), new Product(13, "lemon"),
                new Product(23, "bread"), new Product(13, "sugar"));
-      List<String> collectorCollection = productList.stream().map(Product::name)
+      List<String> collectorList = productList.stream().map(Product::name)
                .collect(Collectors.toList());
-      out.println("Collected List : " + collectorCollection);
+      out.println("Collected List : " + collectorList);
       /** Collected List : [potatoes, orange, lemon, bread, sugar] **/
+
+      Map<String, Integer> collectorMap =
+               productList.stream().map(Product::name)
+                        .collect(Collectors.toMap(s -> s, n -> n.length()));
+      out.println("Collected Map : " + collectorMap);
+      /** Collected Map : {orange=6, lemon=5, bread=5, potatoes=8, sugar=5} **/
+
+      Set<Integer> collectorSet = productList.stream().map(Product::name)
+               .map(String::length).collect(Collectors.toSet());
+      out.println("Collected Set : " + collectorSet);
+      /** Collected Set : [5, 6, 8] **/
+
+      String collectorString =
+               productList.stream().map(Product::name).map(String::length)
+                        .map(String::valueOf).collect(Collectors.joining());
+      out.println("Joined String : " + collectorString);
+      /** Joined String : 86555 **/
+
+      String delimeterJoinedString =
+               productList.stream().map(Product::name).map(String::length)
+                        .map(String::valueOf).collect(Collectors.joining(":"));
+      out.println("Joined String via Delimeter: " + delimeterJoinedString);
+      /**
+       * Joined String via Delimeter: 8:6:5:5:5
+       **/
+
+      String delimeterJoinedFixString =
+               productList.stream().map(Product::name).map(String::length)
+                        .map(String::valueOf).collect(Collectors.joining(",", "{", "}"));
+      out.println("Joined String via Delimeter, Prefix, Suffix: " + delimeterJoinedFixString);
+      /**
+       * Joined String via Delimeter, Prefix, Suffix: {8,6,5,5,5}
+       **/
       
+      int summedIntStream =
+               productList.stream().collect(Collectors.summingInt(Product::quantity));
+      out.println("Summed Int Stream: " + summedIntStream);
+      /**
+       * Summed Int Stream: 86
+       **/
+
+
+      double averageDoubleStream =
+               productList.stream().collect(Collectors.averagingDouble(Product::quantity));
+      double averageIntStream =
+               productList.stream().collect(Collectors.averagingInt(Product::quantity));
+
+      out.println("Average Double Stream: " + averageDoubleStream);
+      out.println("Average Int Stream: " + averageIntStream);
+      /**
+       * Average Double Stream: 17.2
+       * Average Int Stream: 17.2
+       **/
+
+      IntSummaryStatistics summarizedtStream =
+               productList.stream().collect(Collectors.summarizingInt(Product::quantity));
+      out.println("Summarized Stream: " + summarizedtStream);
+      /**
+       * Summarized Stream: IntSummaryStatistics{count=5, sum=86, min=13, average=17.200000, max=23}
+       **/
    }
 
 }
