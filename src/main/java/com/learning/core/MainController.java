@@ -2,7 +2,6 @@ package com.learning.core;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import com.learning.java.StreamPractice;
 
 /**
  * @author Mandvee Vatsa
@@ -16,7 +15,7 @@ public class MainController
    {
       if (ArrayUtils.isNotEmpty(args) && StringUtils.isNotBlank(args[0]))
       {
-        UserInputProcessor.getInstance().processRequest(args[0]);
+         UserInputProcessor.getInstance().processRequest(args[0]);
       }
       else
       {

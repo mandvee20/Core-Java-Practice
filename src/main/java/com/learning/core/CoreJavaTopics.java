@@ -19,16 +19,22 @@ public enum CoreJavaTopics
    MQTT,
    ALL;
 
-   public static CoreJavaTopics fromString(String name){
-     try{
-        for(CoreJavaTopics topic: CoreJavaTopics.values()){
-           if(StringUtils.equalsIgnoreCase(topic.name(),name))
-              return topic;
-        }
-     } catch (Exception e) {
-        System.out.println(e);
-     }
+   public static CoreJavaTopics fromString(String name)
+   {
+      try
+      {
+         for (CoreJavaTopics topic : CoreJavaTopics.values())
+         {
+            if (StringUtils.equalsIgnoreCase(topic.name(), name)) return topic;
+         }
+      }
+      catch (Exception e)
+      {
+         e.printStackTrace();
+      }
       return ALL;
    }
 
 }
+
+
