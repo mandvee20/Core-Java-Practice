@@ -1,16 +1,18 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.learning</groupId>
-  <artifactId>java</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>Learning Java</name>
-  
-  <!-- Java 21 configuration -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.learning</groupId>
+	<artifactId>java</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Learning Java</name>
+
+	<!-- Java 21 configuration -->
 	<properties>
 		<maven.compiler.source>21</maven.compiler.source>
 		<maven.compiler.target>21</maven.compiler.target>
 	</properties>
-  	<dependencies>
+	<dependencies>
 		<!-- To Make MQTT Connection -->
 		<dependency>
 			<groupId>org.eclipse.paho</groupId>
