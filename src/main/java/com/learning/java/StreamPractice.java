@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.Random;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.regex.Pattern;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -58,9 +59,10 @@ public class StreamPractice
       out.println("Empty Stream: " + streamEmpty.collect(Collectors.toSet()));
       /** Empty Stream: java.util.stream.ReferencePipeline$Head@57829d67 **/
       /** Empty Stream: [] **/
-      
+
       Stream<String> nullableEmpty = Stream.ofNullable(null);
-      out.println("Nullable Stream: " + nullableEmpty.collect(Collectors.toSet()));
+      out.println(
+               "Nullable Stream: " + nullableEmpty.collect(Collectors.toSet()));
       /** Nullable Stream: [] **/
 
       Collection<String> collection = Arrays.asList("a", "b", "c");
@@ -81,16 +83,20 @@ public class StreamPractice
 
       String[] arr = new String[] {"a", "b", "a", "c", "d"};
       Stream<String> streamOfArrayFull = Arrays.stream(arr);
-      Stream<String> streamOfArrayPart = Arrays.stream(arr, 1, 3); // start inclusive, end exclusive
+      Stream<String> streamOfArrayPart = Arrays.stream(arr, 1, 3); // start
+                                                                   // inclusive,
+                                                                   // end
+                                                                   // exclusive
 
       out.println("Array Stream: "
                + streamOfArrayFull.collect(Collectors.toList()));
       /** Array Stream: java.util.stream.ReferencePipeline$Head@17c68925 **/
       /** Array Stream: [a, b, c] **/
       out.println("Sub Array Stream: "
-               + streamOfArrayPart.collect(Collectors.toList()) + " From Index: "+1+" To Index: "+3);
+               + streamOfArrayPart.collect(Collectors.toList())
+               + " From Index: " + 1 + " To Index: " + 3);
       /** Sub Array Stream: java.util.stream.ReferencePipeline$Head@7e0ea639 **/
-      /** Sub Array Stream: [b, c] From Index: 1 To Index: 3**/
+      /** Sub Array Stream: [b, c] From Index: 1 To Index: 3 **/
 
       Stream<String> streamBuilder =
                Stream.<String>builder().add("a").add("b").add("c").build();
@@ -126,27 +132,39 @@ public class StreamPractice
       out.println("Iterated Int Square Stream: "
                + streamSquareIterated.collect(Collectors.toList()));
       /** Iterated Int Square Stream: [2, 4, 16, 256, 65536, 0, 0, 0, 0, 0] **/
-      
-      Stream<Integer> streamSquareIteratedTerminated =
-               Stream.iterate(2, n -> n < 65536 , n -> n*n)
-               .limit(10);
-      out.println("Iterated Int Square Stream Terminated at Specific Condition: "
-               + streamSquareIteratedTerminated.collect(Collectors.toList()));
-      /** Iterated Int Square Stream Terminated at Specific Condition: [2, 4, 16, 256] **/
 
-      IntStream intStream = IntStream.range(1, 3); // start inclusive, end exclusive
+      Stream<Integer> streamSquareIteratedTerminated =
+               Stream.iterate(2, n -> n < 65536, n -> n * n).limit(10);
       out.println(
-               "IntStream Range: " + intStream.boxed().collect(Collectors.toSet())  + " From Index: "+1+" To Index: "+3);
+               "Iterated Int Square Stream Terminated at Specific Condition: "
+                        + streamSquareIteratedTerminated
+                                 .collect(Collectors.toList()));
+      /**
+       * Iterated Int Square Stream Terminated at Specific Condition: [2, 4, 16,
+       * 256]
+       **/
+
+      IntStream intStream = IntStream.range(1, 3); // start inclusive, end
+                                                   // exclusive
+      out.println("IntStream Range: "
+               + intStream.boxed().collect(Collectors.toSet()) + " From Index: "
+               + 1 + " To Index: " + 3);
       /** IntStream Range: java.util.stream.IntPipeline$Head@182decdb **/
-      /** IntStream Range: [1, 2] From Index: 1 To Index: 3**/
+      /** IntStream Range: [1, 2] From Index: 1 To Index: 3 **/
 
       LongStream longClosedStream = LongStream.rangeClosed(1, 10); // start ,
                                                                    // end
                                                                    // inclusive
       out.println("LongStream Range Closed: "
-               + longClosedStream.boxed().collect(Collectors.toSet())  + " From Index: "+1+" To Index: "+10);
-      /** LongStream Range Closed: java.util.stream.LongPipeline$Head@39ed3c8d **/
-      /** LongStream Range Closed: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] From Index: 1 To Index: 10 **/
+               + longClosedStream.boxed().collect(Collectors.toSet())
+               + " From Index: " + 1 + " To Index: " + 10);
+      /**
+       * LongStream Range Closed: java.util.stream.LongPipeline$Head@39ed3c8d
+       **/
+      /**
+       * LongStream Range Closed: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] From Index: 1
+       * To Index: 10
+       **/
 
       Random random = new Random();
       DoubleStream doubleRandomStream = random.doubles(4);
@@ -160,8 +178,12 @@ public class StreamPractice
       IntStream intRandomStream = random.ints(10, 0, 5); // start inclusive, end
                                                          // exclusive range
       out.println("Int Random Stream With Size 10: "
-               + intRandomStream.boxed().collect(Collectors.toList()) + " From Number: "+0+" To Number: "+5);
-      /** Int Random Stream With Size 10: [3, 1, 3, 3, 4, 0, 2, 0, 3, 1] From Number: 0 To Number: 5 **/
+               + intRandomStream.boxed().collect(Collectors.toList())
+               + " From Number: " + 0 + " To Number: " + 5);
+      /**
+       * Int Random Stream With Size 10: [3, 1, 3, 3, 4, 0, 2, 0, 3, 1] From
+       * Number: 0 To Number: 5
+       **/
 
       IntStream streamOfChars = "abc".chars();
       out.println("Char Int Stream: "
@@ -250,6 +272,12 @@ public class StreamPractice
       out.println("Min Stream : "
                + Arrays.stream(arr).min(Comparator.naturalOrder()).get());
       /** Min Stream : a **/
+      out.println("Max By Collector : " + Arrays.stream(arr)
+               .collect(Collectors.maxBy(Comparator.naturalOrder())).get());
+      /** Max By Collector: d **/
+      out.println("Min By Collector : " + Arrays.stream(arr)
+               .collect(Collectors.minBy(Comparator.naturalOrder())).get());
+      /** Min By Collector : a **/
       out.println("Sum Stream : " + IntStream.of(1, 2, 3).sum());
       /** Sum Stream : 6 **/
 
@@ -340,6 +368,18 @@ public class StreamPractice
                .map(String::length).collect(Collectors.toSet());
       out.println("Collected Set : " + collectorSet);
       /** Collected Set : [5, 6, 8] **/
+
+      long collectorCounting = productList.stream().map(Product::name)
+               .map(String::length).collect(Collectors.counting());
+      out.println("Collector Count : " + collectorCounting);
+      /** Collector Count : 5 **/
+
+
+      Set<Integer> collectorCollection =
+               productList.stream().map(Product::name).map(String::length)
+                        .collect(Collectors.toCollection(TreeSet::new));
+      out.println("Collected in Tree Set : " + collectorCollection);
+      /** Collected in Tree Set : [5, 6, 8] **/
 
       Set<Integer> collectorUnmodifiableSet =
                productList.stream().map(Product::name).map(String::length)
@@ -445,8 +485,11 @@ public class StreamPractice
 
       out.println("Products Name Collected in Custom Linked List Collector: "
                + linkedListOfProduct);
-      /** Products Name Collected in Custom Linked List Collector: [potatoes, orange, lemon, bread, sugar] **/
-      
+      /**
+       * Products Name Collected in Custom Linked List Collector: [potatoes,
+       * orange, lemon, bread, sugar]
+       **/
+
       List<String> sentences = List.of("I love Java", "Streams are powerful");
 
       List<String> words =
@@ -465,8 +508,8 @@ public class StreamPractice
                         .map(String::valueOf).collect(Collectors.joining(",")));
 
       /**
-       * Filter Even Numbers From: [2, 4, 6, 7, 8, 10] Until a Odd Number is Encountered, Take While
-       * Stream: 2,4,6
+       * Filter Even Numbers From: [2, 4, 6, 7, 8, 10] Until a Odd Number is
+       * Encountered, Take While Stream: 2,4,6
        **/
       out.println("Remove Even Numbers From: "
                + Arrays.asList(2, 4, 6, 7, 8, 10)
@@ -475,8 +518,8 @@ public class StreamPractice
                         .map(String::valueOf).collect(Collectors.joining(",")));
 
       /**
-       * Remove Even Numbers From: [2, 4, 6, 7, 8, 10] Until a Odd Number is Encountered, Drop While
-       * Stream: 7,8,10
+       * Remove Even Numbers From: [2, 4, 6, 7, 8, 10] Until a Odd Number is
+       * Encountered, Drop While Stream: 7,8,10
        **/
    }
 
