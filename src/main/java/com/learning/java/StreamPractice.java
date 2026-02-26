@@ -1,6 +1,7 @@
 package com.learning.java;
 
 import java.io.PrintStream;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -196,7 +197,7 @@ public class StreamPractice
                + streamOfString.collect(Collectors.toList()));
       /** String Pattern Stream : [a, b, c:d] **/
 
-      String filePath = "/home/Mandvee/Desktop/StreamFile.txt";
+      URL filePath =  getClass().getClassLoader().getResource("StreamFile.txt");
       /** File Content **/
       /*
        * Hello!!! I am A Dummy Test File. Nice To Meet You
@@ -204,7 +205,7 @@ public class StreamPractice
        */
       try
       {
-         Path path = Paths.get(filePath);
+         Path path = Paths.get(filePath.toURI());
          Stream<String> streamOfStrings = Files.lines(path);
          out.println("File Stream : "
                   + streamOfStrings.collect(Collectors.toList()));

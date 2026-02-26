@@ -29,12 +29,15 @@ public class UserInputReader implements Runnable
       {
          while (true)
          {
-            String input = scanner.nextLine();
-            if (StringUtils.isNotBlank(input))
-            {
-               processor.processRequest(input);
-               
+            while(scanner.hasNext()) {
+               String input = scanner.nextLine();
+               if (StringUtils.isNotBlank(input))
+               {
+                  processor.processRequest(input);
+                  
+               }
             }
+            
          }
       }
       catch (Exception e)

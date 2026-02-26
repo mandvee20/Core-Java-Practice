@@ -2,6 +2,7 @@ package com.learning.core;
 
 import org.apache.commons.lang3.StringUtils;
 import com.learning.java.LogicBuilding;
+import com.learning.java.ScannerCases;
 import com.learning.java.StreamPractice;
 
 /**
@@ -30,9 +31,14 @@ public class UserInputProcessor
          case LOGIC:
             LogicBuilding.getInstance().buildLogic();
             break;
+         case SCANNER:
+            ScannerCases.getInstance().printScannerCasess();
+            break;
          default:
             StreamPractice.getInstance().printStreamUses();
             LogicBuilding.getInstance().buildLogic();
+            
+            ScannerCases.getInstance().printScannerCasess();
             break;
       }
    }

@@ -17,6 +17,7 @@ public enum CoreJavaTopics
    LOGIC,
    KNX,
    MQTT,
+   SCANNER,
    ALL;
 
    public static CoreJavaTopics fromString(String name)
