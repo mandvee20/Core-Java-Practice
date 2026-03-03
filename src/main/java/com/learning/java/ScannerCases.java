@@ -93,6 +93,14 @@ public class ScannerCases
       {
          scanner = new Scanner(new File(filePath.toURI()));
          out.println("File Input Scanner with .(Full Stop) as Delimiter: ");
+         /**
+          *File Contents: 
+          *HI, I am a Word!
+          *4, I am a Integer Number!
+          *5.5, I am a Double Number!
+          *true, I am a Boolean Unit!
+          **/      
+         
          scanner.useDelimiter("\\!\n");
          while (scanner.hasNextLine())
          {
